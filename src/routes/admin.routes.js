@@ -8,6 +8,8 @@ const adminController = require('../controllers/admin.controller');
 router.post('/login',authController.login);
 router.post('/register', authController.register);
 
+
+//OBTENER TODOS LOS USUARIOS
 router.get('/', adminController.getUsuarios);
 
 
