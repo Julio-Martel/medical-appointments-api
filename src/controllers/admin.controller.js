@@ -20,7 +20,9 @@ const getUsuarios = async(req,res) => {
             })
 
     } catch(error){
-        res.status(500).json({mensaje:'Error interno del servidor'})
+        res.status(500).json({
+            mensaje:'Error interno del servidor'
+        })
     }
 }
 
@@ -50,7 +52,6 @@ const deleteUsuarios = async(req,res) => {
         })
     }
 }
-
 
 module.exports = {
     getUsuarios,
