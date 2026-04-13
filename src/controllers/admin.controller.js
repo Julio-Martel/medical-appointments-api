@@ -24,6 +24,13 @@ const getUsuarios = async(req,res) => {
     }
 }
 
+const deleteUsuarios = async(req,res) => {
+
+}
+
+
+
 module.exports = {
-    getUsuarios
+    getUsuarios,
+    deleteUsuarios
 }
