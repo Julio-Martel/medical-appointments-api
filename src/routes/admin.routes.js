@@ -11,8 +11,10 @@ router.post('/register', authController.register);
 
 //OBTENER TODOS LOS USUARIOS
 router.get('/', adminController.getUsuarios);
+//ELIMINAR USUARIO
 router.delete('/:id', adminController.deleteUsuarios);
-
+//VER TODOS LOS TURNOS
+router.get('/turnos', adminController.getTurnos);
 
 module.exports = router;
 
