@@ -53,7 +53,30 @@ const deleteUsuarios = async(req,res) => {
     }
 }
 
+const getTurnos = async(req,res) => {
+    const headerToken = req.headers.authorization;
+
+    if(!headerToken){
+        return res.status(404).json({
+            mensaje: 'Debe iniciar sesion como administrador para poder ver todos los turnos'
+        })       
+    }
+
+    try {
+
+        
+
+
+
+    } catch(error){
+        res.status(500).json({
+            mensaje: 'Error del servidor'
+        })
+    }
+}
+
 module.exports = {
     getUsuarios,
-    deleteUsuarios
+    deleteUsuarios,
+    getTurnos
 }
