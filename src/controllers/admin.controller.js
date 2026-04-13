@@ -25,9 +25,31 @@ const getUsuarios = async(req,res) => {
 }
 
 const deleteUsuarios = async(req,res) => {
+    const headerToken = req.headers.authorization;
 
+    if(!headerToken){
+        return res.status(404).json({
+            mensaje: 'Debe iniciar sesion como administrador para eliminar algun usuario'
+        })
+    }
+
+    const {id} = req.params;
+
+    try {
+        const [resultado] = await db.query(`DELETE FROM Usuarios WHERE id = ?`,[id]);
+
+         if (resultado.affectedRows === 0) {
+            return res.status(404).send("Usuario no encontrado");
+        }
+
+        res.send("Usuario eliminado correctamente");       
+        
+    } catch(error){
+        res.status(500).json({
+            mensaje: 'Error del servidor'
+        })
+    }
 }
-
 
 
 module.exports = {
