@@ -64,9 +64,12 @@ const getTurnos = async(req,res) => {
 
     try {
 
-        
+        const [resultados] = await db.query(`SELECT * FROM Turnos`);
 
-
+        res.status(200).json({
+            mensaje: 'Todos los turnos registrados',
+            turnos: resultados
+        });
 
     } catch(error){
         res.status(500).json({
