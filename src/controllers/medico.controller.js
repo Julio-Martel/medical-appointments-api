@@ -21,9 +21,7 @@ const getTurnos = async(req,res) => {
         mensaje: 'Todos los turnos que se te asignaron',
         turnos: turnosFiltrados
     })
-
 }
-
 
 module.exports = {
     getTurnos
