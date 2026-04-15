@@ -1,7 +1,12 @@
 const db = require('../config/db');
 
 const getTurnos = async(req,res) => {
-    
+    const headerToken = req.headers.autorizathion
+
+    if(!headerToken){
+        return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');
+    }
+
     const id = req.usuario.id;
 
     const [turnosFiltrados] = await db.query(`SELECT * FROM Turnos WHERE medico_id = ?`, [id]);
