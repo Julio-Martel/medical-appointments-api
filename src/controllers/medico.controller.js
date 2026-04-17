@@ -1,26 +1,33 @@
 const db = require('../config/db');
 
 const getTurnos = async(req,res) => {
-    const headerToken = req.headers.autorizathion
+    const headerToken = req.headers.authorization
 
     if(!headerToken){
         return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');
     }
 
-    const id = req.usuario.id;
+    try{
 
-    const [turnosFiltrados] = await db.query(`SELECT * FROM Turnos WHERE medico_id = ?`, [id]);
+        const id = req.usuario.id;
 
-    if(turnosFiltrados.length === 0){
-        return res.status(404).json({
-            mensaje: 'No tiene turnos asignados'
+        const [turnosFiltrados] = await db.query(`SELECT * FROM Turnos WHERE medico_id = ?`, [id]);
+
+        if(turnosFiltrados.length === 0){
+            return res.status(404).json({
+                mensaje: 'No tiene turnos asignados'
+            })
+        }
+
+        res.status(200).json({
+            mensaje: 'Todos los turnos que se te asignaron',
+            turnos: turnosFiltrados
         })
+
+    } catch(Error){
+        console.log(error)
     }
 
-    res.status(200).json({
-        mensaje: 'Todos los turnos que se te asignaron',
-        turnos: turnosFiltrados
-    })
 }
 
 const confirmacionTurno = async(req,res) => {
@@ -28,9 +35,11 @@ const confirmacionTurno = async(req,res) => {
         return res.send('Debe mandar el estado en el body');
     }
     
-    const hashedPass = req.headers.autorizathion;
+    const hashedPass = req.headers.authorization;
     const {id} = req.params;
-    const estadoConfirmado = req.body;
+    const {estadoConfirmado} = req.body;
+
+    console.log(typeof estadoConfirmado)
 
     if(!hashedPass){
         return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');

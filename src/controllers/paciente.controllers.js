@@ -125,5 +125,6 @@ const cancelarTurno = async(req,res) => {
 
 module.exports = {
     creatTurno,
-    getTurnos
+    getTurnos,
+    cancelarTurno
 };
