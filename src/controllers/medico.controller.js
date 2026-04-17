@@ -40,14 +40,19 @@ const confirmacionTurno = async(req,res) => {
         return res.send('Debe ingresa la palabra: confirmado');
     }
 
-    const [turnoFiltrado] = await db.query(`
-        UPDATE Turnos SET estado = ? WHERE id = ?`, ['Confirmado',id]
-    );
+    try{
+        const [turnoFiltrado] = await db.query(`
+            UPDATE Turnos SET estado = ? WHERE id = ?`, ['Confirmado',id]
+        );
 
-    return res.status(200).json({
-        mensaje: 'Turno confirmado',
-        turno: turnoFiltrado
-    });
+        return res.status(200).json({
+            mensaje: 'Turno confirmado',
+            turno: turnoFiltrado
+        });
+        
+    } catch(error){
+        console.log(error);
+    }
 }
 
 module.exports = {
