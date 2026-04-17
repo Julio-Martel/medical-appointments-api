@@ -14,7 +14,7 @@ router.get('/', authMiddleware.authMiddleware, adminController.getUsuarios);
 //ELIMINAR USUARIO
 router.delete('/:id', authMiddleware.authMiddleware, adminController.deleteUsuarios);
 //VER TODOS LOS TURNOS
-//router.get('/turnos', authMiddleware.authMiddleware, adminController.getTurnos);
+router.get('/turnos', authMiddleware.authMiddleware, adminController.getTurnos);
 
 module.exports = router;
 
