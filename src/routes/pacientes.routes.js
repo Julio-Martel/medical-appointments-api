@@ -6,19 +6,14 @@ const authMiddleware = require('../middlewares/authMiddlewares');
 const permisoPaciente = require('../middlewares/auth.permisos');
 const pacienteController = require('../controllers/paciente.controllers');
 
-
+//LOGEARSE
 router.post('/login', authController.login);
+
+
+
+
 router.post('/turnos', authMiddleware.authMiddleware, pacienteController.creatTurno);
+router.get('/turnos', authMiddleware.authMiddleware, pacienteController.getTurnos);
 
-
-
-
-
-
-/*
-
-    COMPLETAR ESTO PARA QUE EL PACIENTE PUEDA REGISTRAR SU TURNO
-
-*/
 
 module.exports = router;
