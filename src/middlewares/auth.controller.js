@@ -27,7 +27,12 @@ const login = async(req,res) => {
 
         const user = rows[0];
 
-        const token = jwt.sign({email: user.email, pass: user.pass},'secreto',{expiresIn: '1h'})
+        const token = jwt.sign({
+            id: user.id,
+            email: user.email, 
+            pass: user.pass, 
+            rol: user.rol},
+            'secreto',{expiresIn: '1h'})
    
         res.json({
             mensaje:'Login correcto',
