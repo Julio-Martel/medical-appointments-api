@@ -68,10 +68,26 @@ const getTurnos = async(req,res) => {
         return res.send('Debe iniciar sesion para ver sus turnos');
     }
 
+    const id_Usuario = req.usuario.id;
 
-    
+    try {
+        const [turnosFiltrados] = await db.query(`
+            SELECT * FROM Turnos WHERE usuario_id = ? `,[id_Usuario]);
+
+        if(turnosFiltrados.length === 0){
+            return res.status(404).json({
+                mensaje: 'No hay turnos con ese id'
+            })
+        }
+
+        res.status(200).json({
+            mensaje: 'Todos tus turnos',
+            turnos: turnosFiltrados
+        })
+    } catch(error){
+        console.log(error);
+    }
 }
-
 
 module.exports = {
     creatTurno,
