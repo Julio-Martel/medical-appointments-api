@@ -23,6 +23,22 @@ const getTurnos = async(req,res) => {
     })
 }
 
+
+const confirmacionTurno = async(req,res) => {
+    const hashedPass = req.headers.autorizathion;
+
+    if(!hashedPass){
+        return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');
+    }
+
+
+
+}
+
+
+
+
 module.exports = {
-    getTurnos
+    getTurnos,
+    confirmacionTurno
 }
