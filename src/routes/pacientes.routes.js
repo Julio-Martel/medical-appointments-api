@@ -9,10 +9,7 @@ const pacienteController = require('../controllers/paciente.controllers');
 //LOGEARSE
 router.post('/login', authController.login);
 
-
-
-
-router.post('/turnos', authMiddleware.authMiddleware, pacienteController.creatTurno);
+router.post('/turnos', authMiddleware.authMiddleware, permisoPaciente.verificarRolPaciente,  pacienteController.creatTurno);
 router.get('/turnos', authMiddleware.authMiddleware, pacienteController.getTurnos);
 
 
