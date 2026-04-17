@@ -10,7 +10,7 @@ const pacienteController = require('../controllers/paciente.controllers');
 router.post('/login', authController.login);
 
 router.post('/turnos', authMiddleware.authMiddleware, permisoPaciente.verificarRolPaciente,  pacienteController.creatTurno);
-router.get('/turnos', authMiddleware.authMiddleware, pacienteController.getTurnos);
+router.get('/turnos', authMiddleware.authMiddleware, permisoPaciente.verificarRolPaciente, pacienteController.getTurnos);
 
 
 module.exports = router;
