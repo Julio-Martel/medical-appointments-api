@@ -89,6 +89,40 @@ const getTurnos = async(req,res) => {
     }
 }
 
+const cancelarTurno = async(req,res) => {
+    if(!req.body || Object.keys(req.body).length === 0){
+        return res.send('Debe mandar el estado en el body.');
+    }
+    
+    const {id} = req.params;
+    const hashedPass = req.headers.autorizathion;
+
+    if(!hashedPass){
+        return res.send('Debe iniciar sesion y ser paciente para cancelar un turno.')
+    }
+
+    try{
+        const id_Usuario = req.usuario.id;
+
+        const [turnoCancelado] = await db.query(`
+            UPDATE Turnos SET estado = ? WHERE usuario_id = ? AND id = ?
+            `,['cancelado', id_Usuario, id]);
+
+
+        if(turnoCancelado.length === 0){
+            return res.send('No existe turno con ese id.')
+        }        
+
+        res.status(200).json({
+            mensaje: 'Turno cancelado',
+            turno: turnoCancelado 
+        })
+
+    } catch(error){
+        console.log(error)
+    }
+}
+
 module.exports = {
     creatTurno,
     getTurnos
