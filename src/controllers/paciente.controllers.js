@@ -61,12 +61,19 @@ const creatTurno = async(req,res) => {
     }
 }
 
-const cancelarTurno = async(req,res) => {
+const getTurnos = async(req,res) => {
+    const hashedPass = req.headers.autorizathion;
 
+    if(!hashedPass){
+        return res.send('Debe iniciar sesion para ver sus turnos');
+    }
+
+
+    
 }
 
 
 module.exports = {
     creatTurno,
-    cancelarTurno
+    getTurnos
 };
