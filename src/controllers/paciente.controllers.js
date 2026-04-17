@@ -61,4 +61,12 @@ const creatTurno = async(req,res) => {
     }
 }
 
-module.exports = {creatTurno};
+const cancelarTurno = async(req,res) => {
+
+}
+
+
+module.exports = {
+    creatTurno,
+    cancelarTurno
+};

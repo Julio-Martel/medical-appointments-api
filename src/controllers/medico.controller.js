@@ -23,20 +23,32 @@ const getTurnos = async(req,res) => {
     })
 }
 
-
 const confirmacionTurno = async(req,res) => {
+    if(!req.body || Object.keys(req.body).length === 0){
+        return res.send('Debe mandar el estado en el body');
+    }
+    
     const hashedPass = req.headers.autorizathion;
+    const {id} = req.params;
+    const estadoConfirmado = req.body;
 
     if(!hashedPass){
         return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');
     }
 
+    if(estadoConfirmado !== 'confirmado'){
+        return res.send('Debe ingresa la palabra: confirmado');
+    }
 
+    const [turnoFiltrado] = await db.query(`
+        UPDATE Turnos SET estado = ? WHERE id = ?`, ['Confirmado',id]
+    );
 
+    return res.status(200).json({
+        mensaje: 'Turno confirmado',
+        turno: turnoFiltrado
+    });
 }
-
-
-
 
 module.exports = {
     getTurnos,
