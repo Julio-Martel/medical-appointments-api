@@ -62,7 +62,7 @@ const creatTurno = async(req,res) => {
 }
 
 const getTurnos = async(req,res) => {
-    const hashedPass = req.headers.autorizathion;
+    const hashedPass = req.headers.authorization;
 
     if(!hashedPass){
         return res.send('Debe iniciar sesion para ver sus turnos');
@@ -95,7 +95,7 @@ const cancelarTurno = async(req,res) => {
     }
     
     const {id} = req.params;
-    const hashedPass = req.headers.autorizathion;
+    const hashedPass = req.headers.authorization;
 
     if(!hashedPass){
         return res.send('Debe iniciar sesion y ser paciente para cancelar un turno.')

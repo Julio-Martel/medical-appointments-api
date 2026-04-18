@@ -50,13 +50,30 @@ const confirmacionTurno = async(req,res) => {
     }
 
     try{
-        const [turnoFiltrado] = await db.query(`
-            UPDATE Turnos SET estado = ? WHERE id = ?`, ['Confirmado',id]
-        );
+
+        /*
+        
+        
+        
+        
+        */
+
+
+        const [resultado] = await db.query(`
+             UPDATE Turnos 
+                 SET estado = 'Confirmado' 
+                     WHERE id = ? AND estado != 'Cancelado'
+        `, [id]);
+
+        if (resultado.affectedRows === 0) {
+        return res.status(400).json({
+            mensaje: 'No se puede confirmar el turno porque está cancelado o no existe'
+        });
+}
 
         return res.status(200).json({
             mensaje: 'Turno confirmado',
-            turno: turnoFiltrado
+            turno: resultado
         });
         
     } catch(error){
