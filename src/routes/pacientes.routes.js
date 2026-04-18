@@ -11,7 +11,7 @@ router.post('/login', authController.login);
 
 router.post('/turnos', controlarToken.authMiddleware, permisoPaciente.verificarRolPaciente,  pacienteController.creatTurno);
 router.get('/turnos', controlarToken.authMiddleware, permisoPaciente.verificarRolPaciente, pacienteController.getTurnos);
-router.post('/turnos/:id', controlarToken.authMiddleware, permisoPaciente.verificarRolPaciente, pacienteController.cancelarTurno);
+router.patch('/turnos/:id', controlarToken.authMiddleware, permisoPaciente.verificarRolPaciente, pacienteController.cancelarTurno);
 
 
 

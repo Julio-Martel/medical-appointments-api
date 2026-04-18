@@ -11,10 +11,3 @@ router.patch('/turnos/:id', authMiddleware.authMiddleware, medicosControllers.co
 
 
 module.exports = router;
-
-/*
-
-    EL MEDICO YA PUEDE CONFIRMAR UN TURNO
-
-
-*/
