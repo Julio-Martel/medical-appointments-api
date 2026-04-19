@@ -23,7 +23,6 @@ const verificarRolAdmin = (req,res,next) => {
     next();
 }
 
-
 module.exports = {
     verificarRolPaciente,
     verificarRolMedico,
