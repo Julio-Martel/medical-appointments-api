@@ -11,11 +11,11 @@ router.post('/login',authController.login);
 router.post('/register', authController.register);
 
 //OBTENER TODOS LOS USUARIOS
-router.get('/', authMiddleware.authMiddleware, permisos.verificarRolMedico,  adminController.getUsuarios);
+router.get('/', authMiddleware.authMiddleware, permisos.verificarRolAdmin,  adminController.getUsuarios);
 //ELIMINAR USUARIO
-router.delete('/:id', authMiddleware.authMiddleware, permisos.verificarRolMedico, adminController.deleteUsuarios);
+router.delete('/:id', authMiddleware.authMiddleware, permisos.verificarRolAdmin, adminController.deleteUsuarios);
 //VER TODOS LOS TURNOS
-router.get('/turnos', authMiddleware.authMiddleware, permisos.verificarRolMedico, adminController.getTurnos);
+router.get('/turnos', authMiddleware.authMiddleware, permisos.verificarRolAdmin, adminController.getTurnos);
 
 module.exports = router;
 
