@@ -31,38 +31,19 @@ const getTurnos = async(req,res) => {
 }
 
 const confirmacionTurno = async(req,res) => {
-    if(!req.body || Object.keys(req.body).length === 0){
-        return res.send('Debe mandar el estado en el body');
-    }
-    
     const hashedPass = req.headers.authorization;
     const {id} = req.params;
-    const {estadoConfirmado} = req.body;
-
-    console.log(typeof estadoConfirmado)
 
     if(!hashedPass){
         return res.send('Debe iniciar sesion para poder ver todos turnos que le fueron asignados.');
     }
 
-    if(estadoConfirmado !== 'confirmado'){
-        return res.send('Debe ingresa la palabra: confirmado');
-    }
-
     try{
-
-        /*
-        
-        
-        
-        
-        */
-
 
         const [resultado] = await db.query(`
              UPDATE Turnos 
-                 SET estado = 'Confirmado' 
-                     WHERE id = ? AND estado != 'Cancelado'
+                 SET estado = 'confirmado' 
+                     WHERE id = ? AND estado != 'cancelado'
         `, [id]);
 
         if (resultado.affectedRows === 0) {
