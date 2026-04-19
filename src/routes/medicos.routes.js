@@ -9,5 +9,4 @@ router.post('/login', authController.login);
 router.get('/turnos', authMiddleware.authMiddleware, medicosControllers.getTurnos);
 router.patch('/turnos/:id', authMiddleware.authMiddleware, medicosControllers.confirmacionTurno);
 
-
 module.exports = router;
